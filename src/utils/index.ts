@@ -1,4 +1,6 @@
-const getInitialData = () => ([
+import type { Note } from '../types';
+
+const getInitialData = (): Note[] => [
   {
     id: 1,
     title: 'Babel',
@@ -41,14 +43,14 @@ const getInitialData = () => ([
     createdAt: '2025-05-20T04:27:34.572Z',
     archived: false,
   },
-]);
+];
 
-const showFormattedDate = (date) => {
-  const options = {
+const showFormattedDate = (date: string) => {
+  const options: Intl.DateTimeFormatOptions = {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   };
   return new Date(date).toLocaleDateString('id-ID', options);
 };

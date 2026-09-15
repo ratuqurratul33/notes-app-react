@@ -20,9 +20,11 @@ This project is part of a submission for learning fundamental React concepts.
 
 ## 🧩 Tech Stack
 
-⚛️ React (Class Component)
+⚛️ React (Functional Component + Hooks)
+🔷 TypeScript
 ⚡ Vite
-🧠 JavaScript (ES6+)
+🧪 Vitest + React Testing Library
+💾 localStorage persistence
 🎨 CSS (Custom styling)
 
 ---

@@ -1,8 +1,8 @@
-import React from 'react';
 import NoteItem from './NoteItem';
+import type { Note } from '../types';
 
-function groupNotesByMonthYear(notes) {
-  const groups = {};
+function groupNotesByMonthYear(notes: Note[]) {
+  const groups: Record<string, Note[]> = {};
   notes.forEach((note) => {
     const date = new Date(note.createdAt);
     const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
@@ -12,22 +12,33 @@ function groupNotesByMonthYear(notes) {
   return groups;
 }
 
-function formatGroupHeader(key) {
+function formatGroupHeader(key: string) {
   const [year, month] = key.split('-');
-  const date = new Date(year, parseInt(month, 10) - 1, 1);
+  const date = new Date(Number(year), Number(month) - 1, 1);
   return date.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
 }
 
-function NotesList({ notes, onDelete, onArchive, dataTestId = 'notes-list', searchKeyword = '' }) {
-  const hasNotes = Array.isArray(notes) && notes.length > 0;
+interface NotesListProps {
+  notes: Note[];
+  onDelete: (id: number) => void;
+  onArchive: (id: number) => void;
+  dataTestId?: string;
+  searchKeyword?: string;
+}
+
+function NotesList({
+  notes,
+  onDelete,
+  onArchive,
+  dataTestId = 'notes-list',
+  searchKeyword = '',
+}: NotesListProps) {
+  const hasNotes = notes.length > 0;
 
   if (!hasNotes) {
     return (
       <div className="notes-list" data-testid={dataTestId}>
-        <p
-          className="notes-list__empty-message"
-          data-testid={`${dataTestId}-empty`}
-        >
+        <p className="notes-list__empty-message" data-testid={`${dataTestId}-empty`}>
           Tidak ada catatan
         </p>
       </div>
@@ -39,16 +50,10 @@ function NotesList({ notes, onDelete, onArchive, dataTestId = 'notes-list', sear
   return (
     <div className="notes-list" data-testid={dataTestId}>
       {Object.entries(groupedNotes).map(([groupKey, groupNotes]) => (
-        <section
-          key={groupKey}
-          data-testid={`${groupKey}-group`}
-          className="notes-group"
-        >
+        <section key={groupKey} data-testid={`${groupKey}-group`} className="notes-group">
           <div className="notes-group__header">
             <h3>{formatGroupHeader(groupKey)}</h3>
-            <span data-testid={`${groupKey}-group-count`}>
-              {groupNotes.length} catatan
-            </span>
+            <span data-testid={`${groupKey}-group-count`}>{groupNotes.length} catatan</span>
           </div>
           {groupNotes.map((note) => (
             <NoteItem

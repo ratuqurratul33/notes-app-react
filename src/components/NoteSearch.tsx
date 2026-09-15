@@ -1,7 +1,11 @@
-import React from 'react';
+import type { ChangeEvent } from 'react';
 
-function NoteSearch({ onSearch }) {
-  function onSearchChangeHandler(event) {
+interface NoteSearchProps {
+  onSearch: (keyword: string) => void;
+}
+
+function NoteSearch({ onSearch }: NoteSearchProps) {
+  function onSearchChange(event: ChangeEvent<HTMLInputElement>) {
     onSearch(event.target.value);
   }
 
@@ -11,7 +15,7 @@ function NoteSearch({ onSearch }) {
         className="note-search__input"
         type="text"
         placeholder="Cari catatan ..."
-        onChange={onSearchChangeHandler}
+        onChange={onSearchChange}
         data-testid="note-search-input"
       />
     </div>
