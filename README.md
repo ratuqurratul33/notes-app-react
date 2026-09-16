@@ -19,12 +19,12 @@ A minimalist personal notes app to quickly capture, organize, and search your th
 
 ## 🧩 Tech Stack
 
-* ⚛️ **React 19** — Functional Components + Hooks
-* 🔷 **TypeScript**
-* ⚡ **Vite**
-* 🧪 **Vitest** + **React Testing Library**
-* 💾 **localStorage** — client-side persistence
-* 🎨 **CSS3** — custom styling, no UI framework
+* **React 19** — Functional Components + Hooks
+*  **TypeScript**
+* **Vite**
+* **Vitest** + **React Testing Library**
+* **localStorage** — client-side persistence
+* **CSS3** — custom styling, no UI framework
 
 ---
 
