@@ -51,7 +51,7 @@ function App() {
   return (
     <div className="note-app" data-theme={theme} data-testid="note-app">
       <div className="note-app__header" data-testid="note-app-header">
-        <h1>Notes</h1>
+        <h1>Quick Notes</h1>
         <NoteSearch onSearch={setSearchKeyword} />
         <SortSelect value={sortOption} onChange={setSortOption} />
         <NoteDataActions notes={notes} onImport={replaceAllNotes} />

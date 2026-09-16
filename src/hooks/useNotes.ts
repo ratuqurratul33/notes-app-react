@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useLocalStorage from './useLocalStorage';
-import { getInitialData } from '../utils';
 import type { Note, NoteColor } from '../types';
 
 const STORAGE_KEY = 'notes-app/notes';
 const UNDO_TIMEOUT_MS = 5000;
 
 function useNotes() {
-  const [notes, setNotes] = useLocalStorage<Note[]>(STORAGE_KEY, getInitialData);
+  const [notes, setNotes] = useLocalStorage<Note[]>(STORAGE_KEY, []);
   const [pendingDelete, setPendingDelete] = useState<Note | null>(null);
   const undoTimerRef = useRef<number | null>(null);
 

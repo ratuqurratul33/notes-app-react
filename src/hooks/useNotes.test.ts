@@ -12,25 +12,28 @@ describe('useNotes', () => {
     vi.useRealTimers();
   });
 
-  it('should load initial notes when localStorage is empty', () => {
+  it('should start with an empty notes list when localStorage is empty', () => {
     const { result } = renderHook(() => useNotes());
-    expect(result.current.notes.length).toBeGreaterThan(0);
+    expect(result.current.notes).toHaveLength(0);
   });
 
   it('should add a new note', () => {
     const { result } = renderHook(() => useNotes());
-    const initialCount = result.current.notes.length;
 
     act(() => {
       result.current.addNote({ title: 'Judul baru', body: 'Isi catatan baru yang panjang' });
     });
 
-    expect(result.current.notes).toHaveLength(initialCount + 1);
-    expect(result.current.notes.at(-1)?.title).toBe('Judul baru');
+    expect(result.current.notes).toHaveLength(1);
+    expect(result.current.notes[0].title).toBe('Judul baru');
   });
 
   it('should update the title and body of a note', () => {
     const { result } = renderHook(() => useNotes());
+
+    act(() => {
+      result.current.addNote({ title: 'Judul lama', body: 'Isi catatan yang lama' });
+    });
     const targetId = result.current.notes[0].id;
 
     act(() => {
@@ -44,6 +47,10 @@ describe('useNotes', () => {
 
   it('should remove a note immediately and expose it as pendingDelete', () => {
     const { result } = renderHook(() => useNotes());
+
+    act(() => {
+      result.current.addNote({ title: 'Judul', body: 'Isi catatan yang akan dihapus' });
+    });
     const targetId = result.current.notes[0].id;
 
     act(() => {
@@ -56,6 +63,10 @@ describe('useNotes', () => {
 
   it('should restore the note when undoDelete is called', () => {
     const { result } = renderHook(() => useNotes());
+
+    act(() => {
+      result.current.addNote({ title: 'Judul', body: 'Isi catatan yang akan dihapus' });
+    });
     const targetId = result.current.notes[0].id;
 
     act(() => {
@@ -71,6 +82,10 @@ describe('useNotes', () => {
 
   it('should clear pendingDelete automatically after the undo window', () => {
     const { result } = renderHook(() => useNotes());
+
+    act(() => {
+      result.current.addNote({ title: 'Judul', body: 'Isi catatan yang akan dihapus' });
+    });
     const targetId = result.current.notes[0].id;
 
     act(() => {
@@ -85,19 +100,25 @@ describe('useNotes', () => {
 
   it('should toggle archive status', () => {
     const { result } = renderHook(() => useNotes());
+
+    act(() => {
+      result.current.addNote({ title: 'Judul', body: 'Isi catatan yang cukup panjang' });
+    });
     const targetId = result.current.notes[0].id;
-    const initialArchived = result.current.notes[0].archived;
 
     act(() => {
       result.current.toggleArchive(targetId);
     });
 
-    const updated = result.current.notes.find((note) => note.id === targetId);
-    expect(updated?.archived).toBe(!initialArchived);
+    expect(result.current.notes.find((note) => note.id === targetId)?.archived).toBe(true);
   });
 
   it('should toggle pinned status', () => {
     const { result } = renderHook(() => useNotes());
+
+    act(() => {
+      result.current.addNote({ title: 'Judul', body: 'Isi catatan yang cukup panjang' });
+    });
     const targetId = result.current.notes[0].id;
 
     act(() => {
@@ -109,6 +130,10 @@ describe('useNotes', () => {
 
   it('should update note color', () => {
     const { result } = renderHook(() => useNotes());
+
+    act(() => {
+      result.current.addNote({ title: 'Judul', body: 'Isi catatan yang cukup panjang' });
+    });
     const targetId = result.current.notes[0].id;
 
     act(() => {
