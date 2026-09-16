@@ -52,7 +52,7 @@ This project was built to practice core React & frontend engineering concepts, i
 
 ## 👀 Preview
 
-> This project is not deployed online, so screenshots below are used as a preview instead of a live demo link.
+🔗 **Live demo:** [quicknotes-l6er2n047-ratuqurratul33s-projects.vercel.app](https://quicknotes-l6er2n047-ratuqurratul33s-projects.vercel.app/)
 
 <img width="1919" height="939" alt="Notes App - Light theme" src="REPLACE_WITH_YOUR_IMAGE_URL_1" />
 <img width="1919" height="934" alt="Notes App - Dark theme" src="REPLACE_WITH_YOUR_IMAGE_URL_2" />
