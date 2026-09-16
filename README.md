@@ -1,57 +1,72 @@
-# 📝 React Personal Notes App
+# 📝 Notes App
 
-A simple personal notes application built using **React (Vite)**.
-This project is part of a submission for learning fundamental React concepts.
+A minimalist personal notes app to quickly capture, organize, and search your thoughts — built with React and TypeScript.
 
 ---
 
 ## 🚀 Features
 
-* Add new notes
-* Delete notes
+* Add and delete notes
 * Archive & unarchive notes
-* Search notes (case-insensitive)
-* Highlight search results
-* Group notes by month & year
-* Controlled form with validation
-* Reusable components
+* Real-time search with keyword highlighting
+* Auto-group notes by month & year
+* Dark / Light theme toggle (persisted across sessions)
+* Data persistence via `localStorage`
+* Controlled forms with validation
+* Fully covered with unit & integration tests
 
 ---
 
 ## 🧩 Tech Stack
 
-⚛️ React (Functional Component + Hooks)
-🔷 TypeScript
-⚡ Vite
-🧪 Vitest + React Testing Library
-💾 localStorage persistence
-🎨 CSS (Custom styling)
+* ⚛️ **React 19** — Functional Components + Hooks
+* 🔷 **TypeScript**
+* ⚡ **Vite**
+* 🧪 **Vitest** + **React Testing Library**
+* 💾 **localStorage** — client-side persistence
+* 🎨 **CSS3** — custom styling, no UI framework
 
 ---
 
-## 📂 Project Structure
+## 🎯 Project Purpose
 
-```
-src/
- ├── components/
- │    ├── App.jsx
- │    ├── NoteInput.jsx
- │    ├── NoteItem.jsx
- │    ├── NotesList.jsx
- │    ├── NoteSearch.jsx
- │    └── NoteActionButton.jsx
- ├── utils/
- └── main.jsx
-```
+This project was built to practice core React & frontend engineering concepts, including:
+
+* Component-based architecture
+* Custom hooks (`useNotes`, `useTheme`, `useLocalStorage`)
+* State & props management
+* Controlled components and form validation
+* Conditional & list rendering
+* Search and filter logic
+* Unit & integration testing with Vitest + RTL
 
 ---
 
-## ▶️ How to Run
+## 📌 Notes
 
-1. Clone repository
+* No backend — all data is stored locally in the browser
+* No external UI libraries used
+* Fully modular, reusable component structure
+
+---
+
+## 👀 Preview
+
+> This project is not deployed online, so screenshots below are used as a preview instead of a live demo link.
+
+<img width="1919" height="939" alt="Notes App - Light theme" src="REPLACE_WITH_YOUR_IMAGE_URL_1" />
+<img width="1919" height="934" alt="Notes App - Dark theme" src="REPLACE_WITH_YOUR_IMAGE_URL_2" />
+<img width="1919" height="943" alt="Notes App - Search & highlight" src="REPLACE_WITH_YOUR_IMAGE_URL_3" />
+<img width="959" height="457" alt="Notes App - Archive section" src="REPLACE_WITH_YOUR_IMAGE_URL_4" />
+
+---
+
+## ▶️ How to Build
+
+1. Clone the repository
 
 ```bash
-git clone https://github.com/USERNAME/react-personal-notes-app.git
+git clone https://github.com/USERNAME/REPO_NAME.git
 ```
 
 2. Install dependencies
@@ -60,49 +75,35 @@ git clone https://github.com/USERNAME/react-personal-notes-app.git
 npm install
 ```
 
-3. Run development server
+3. Run the development server
 
 ```bash
 npm run dev
 ```
 
-4. Open in browser:
+4. Open in your browser
 
 ```
 http://localhost:5173
 ```
 
----
+5. Build for production
 
-## 🎯 Project Purpose
+```bash
+npm run build
+```
 
-This project was created to practice fundamental React concepts such as:
+6. Run tests
 
-* Component-based architecture
-* State and props management
-* Event handling
-* Controlled components
-* Conditional rendering
-* List rendering with map
-* Data filtering using filter
+```bash
+npm run test
+```
 
 ---
 
-## 📌 Notes
+## 👩‍💻 Developer
 
-* Built using **React DOM (Web App)**
-* No external UI libraries used
-* Fully follows modular component structure
-
----
-
-
-## 👩‍💻 Preview
-
-<img width="1919" height="939" alt="image" src="https://github.com/user-attachments/assets/eacc1cf5-93e8-4372-8784-3afaa8ed5fc8" />
-<img width="1919" height="934" alt="image" src="https://github.com/user-attachments/assets/bb8fd8c2-3f32-4ab4-9864-e14846f0b7a5" />
-<img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/7daf23f6-6e94-42f6-a1b1-c0b02db4cd30" />
-<img width="959" height="457" alt="image" src="https://github.com/user-attachments/assets/7de984b6-b6f4-4fcb-bb58-d61d1f1d2e0b" />
-
-
-
+**Name:** Ratu Qurratul Aini
+**Role:** Informatics Engineering Student
+**Email:** ratuquratul@gmail.com
+**LinkedIn:** [linkedin.com/in/ratu-qurratul-aini-885b7a2a6](https://www.linkedin.com/in/ratu-qurratul-aini-885b7a2a6/)

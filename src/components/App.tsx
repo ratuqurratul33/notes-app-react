@@ -1,14 +1,32 @@
 import { useMemo, useState } from 'react';
 import useNotes from '../hooks/useNotes';
 import useTheme from '../hooks/useTheme';
+import { sortNotes } from '../utils';
 import NoteInput from './NoteInput';
 import NotesList from './NotesList';
 import NoteSearch from './NoteSearch';
+import SortSelect from './SortSelect';
+import NoteDataActions from './NoteDataActions';
+import UndoToast from './UndoToast';
+import type { SortOption } from '../types';
 
 function App() {
-  const { notes, addNote, deleteNote, toggleArchive } = useNotes();
+  const {
+    notes,
+    addNote,
+    updateNote,
+    requestDelete,
+    pendingDelete,
+    undoDelete,
+    dismissDelete,
+    toggleArchive,
+    togglePin,
+    setNoteColor,
+    replaceAllNotes,
+  } = useNotes();
   const { theme, toggleTheme } = useTheme();
   const [searchKeyword, setSearchKeyword] = useState('');
+  const [sortOption, setSortOption] = useState<SortOption>('newest');
 
   const filteredNotes = useMemo(
     () =>
@@ -21,19 +39,13 @@ function App() {
   );
 
   const activeNotes = useMemo(
-    () =>
-      filteredNotes
-        .filter((note) => !note.archived)
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
-    [filteredNotes]
+    () => sortNotes(filteredNotes.filter((note) => !note.archived), sortOption),
+    [filteredNotes, sortOption]
   );
 
   const archivedNotes = useMemo(
-    () =>
-      filteredNotes
-        .filter((note) => note.archived)
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
-    [filteredNotes]
+    () => sortNotes(filteredNotes.filter((note) => note.archived), sortOption),
+    [filteredNotes, sortOption]
   );
 
   return (
@@ -41,6 +53,8 @@ function App() {
       <div className="note-app__header" data-testid="note-app-header">
         <h1>Notes</h1>
         <NoteSearch onSearch={setSearchKeyword} />
+        <SortSelect value={sortOption} onChange={setSortOption} />
+        <NoteDataActions notes={notes} onImport={replaceAllNotes} />
         <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle Theme">
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
@@ -51,8 +65,11 @@ function App() {
           <h2 id="active-notes-title">Catatan Aktif</h2>
           <NotesList
             notes={activeNotes}
-            onDelete={deleteNote}
+            onDelete={requestDelete}
             onArchive={toggleArchive}
+            onUpdate={updateNote}
+            onTogglePin={togglePin}
+            onColorChange={setNoteColor}
             dataTestId="active-notes-list"
             searchKeyword={searchKeyword}
           />
@@ -61,13 +78,24 @@ function App() {
           <h2 id="archived-notes-title">Arsip</h2>
           <NotesList
             notes={archivedNotes}
-            onDelete={deleteNote}
+            onDelete={requestDelete}
             onArchive={toggleArchive}
+            onUpdate={updateNote}
+            onTogglePin={togglePin}
+            onColorChange={setNoteColor}
             dataTestId="archived-notes-list"
             searchKeyword={searchKeyword}
           />
         </section>
       </div>
+
+      {pendingDelete && (
+        <UndoToast
+          message={`"${pendingDelete.title}" dihapus`}
+          onUndo={undoDelete}
+          onDismiss={dismissDelete}
+        />
+      )}
     </div>
   );
 }
